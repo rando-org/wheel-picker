@@ -1,0 +1,9 @@
+.no-space {
+  padding: 0;
+  margin: 0;
+}
+
+table.center {
+  margin-left:auto; 
+  margin-right:auto;
+}

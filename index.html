@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>rando.org</title>
+        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" />
+        <script
+          src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+          crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+        <script type="text/javascript" src="lib/Winwheel.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+        
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <div class="ui secondary pointing menu">
+            <div class="item">
+                <h3>rando.org</h3>
+            </div>
+            <div class="right menu">
+                <a class="ui item">
+                    Feedback
+                </a>
+                <a class="ui item">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+        <div class="ui center aligned container">
+            <div id = "loader" class="ui active dimmer">
+                <div class="ui loader"></div>
+            </div>
+            <h1 class = "no-space"> rando.org </h1>
+            <h3 class = "no-space"> Random Wheel Picker </h3>
+            <div class="ui two column grid container">
+                <div class="ui column">
+                    <!-- SPINNER -->
+                    <table cellpadding="0" cellspacing="0" border="0" class = "center">
+                        <tr>
+                            <td width="438" height="582" class="the_wheel" align="center" valign="center">
+                                <canvas id="canvas" width="434" height="434">
+                                    <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+                                </canvas>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="ui column" id = "app">
+                    <div class="ui left aligned segment form">
+                        <div class="field">
+                            <p class = "no-space"> Enter the names before clicking on the `Spin` button. </p>
+                            <p class="no-space"> <b>Make sure to click on `Load` before spinning. </b></p>
+                            <label>Choices</label>
+                            <textarea v-model="choicesText"></textarea>
+                        </div>
+                        <button class="ui blue button" @click="loadWheelFromText">
+                            Load
+                        </button>
+                        <button class="ui green button" @click="spinButtonTrigger"> 
+                            Spin! 
+                        </button>
+
+                    </div>
+                    <div class="ui mini modal">
+                        <div class="header">
+                          <p> Picked: {{recentlyPicked?recentlyPicked.text:""}} </p>
+                        </div>
+                        <div class="actions">
+                          <div class="ui approve green button">Continue</div>
+                          <div class="ui cancel red button" @click="removeSelectedSegment">Remove</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/index.js"></script>
+    </body>
+</html>
